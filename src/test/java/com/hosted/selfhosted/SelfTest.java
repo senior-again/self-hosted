@@ -13,6 +13,6 @@ public class SelfTest {
 
     @Test
     void success_test(){
-        //성공하는 테스트
+        //성공하는 테스트 재시도
     }
 }
