@@ -11,4 +11,9 @@ public class SelfController {
     public String hi(){
         return "hi";
     }
+
+    @GetMapping("/test")
+    public String hello(){
+        return "test HEllo";
+    }
 }
