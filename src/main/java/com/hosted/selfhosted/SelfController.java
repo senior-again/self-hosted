@@ -9,7 +9,7 @@ public class SelfController {
 
     @GetMapping("/")
     public String hi(){
-        return "hi";
+        return "hi v2";
     }
 
     @GetMapping("/test")
