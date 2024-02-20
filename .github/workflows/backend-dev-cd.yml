@@ -48,18 +48,17 @@ jobs:
     runs-on: [self-hosted, test-actions]
     
     steps:
-    - name: WAS인스턴스 접속 및 애플리케이션 실행
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.HOST_DEV }}
-        username: ${{ secrets.WAS_USERNAME }}
-        key: ${{ secrets.WAS_KEY }}
-        port: 22
-        script: |
-          docker rm -f agilehub-dev-backend || true
-          docker pull ${{ env.DOCKER_HUB_REPOSITORY }}:${{ github.sha }}
-          docker run -d -p 8080:8080 --name agilehub-dev-backend ${{ env.DOCKER_HUB_REPOSITORY }}:${{ github.sha }}
-       
+      - name: Checkout code
+        uses: actions/checkout@v3
+        # 필요에 따라 코드 체크아웃
+
+      - name: WAS인스턴스 접속 및 애플리케이션 실행
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY_PATH }} ${{ secrets.WAS_USERNAME }}@${{ secrets.HOST_DEV }} << EOF
+            docker rm -f agilehub-dev-backend || true
+            docker pull ${{ env.DOCKER_HUB_REPOSITORY }}:${{ github.sha }}
+            docker run -d -p 8080:8080 --name agilehub-dev-backend ${{ env.DOCKER_HUB_REPOSITORY }}:${{ github.sha }}
+          EOF
 
      
        
