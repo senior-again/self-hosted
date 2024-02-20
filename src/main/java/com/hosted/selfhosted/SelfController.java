@@ -14,6 +14,6 @@ public class SelfController {
 
     @GetMapping("/test")
     public String hello(){
-        return "test Hello,";
+        return "test Hello";
     }
 }
