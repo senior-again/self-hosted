@@ -45,7 +45,7 @@ jobs:
   backend-docker-pull-and-run:
     needs: [ backend-docker-build-and-push ]
     if: ${{ needs.backend-docker-build-and-push.result == 'success' }}
-    runs-on: [self-hosted, test-actions]
+    runs-on: [self-hosted, cd-actions]
     
     steps:
       - name: Checkout code
